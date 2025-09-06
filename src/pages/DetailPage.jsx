@@ -1,6 +1,6 @@
 import React from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { FiDownload, FiTrash } from 'react-icons/fi';
+import { FiDownload, FiUpload, FiTrash } from 'react-icons/fi';
 import { getNote } from '../utils/local-data';
 import { showFormattedDate } from '../utils';
 import { archiveNote, unarchiveNote, deleteNote } from '../utils/local-data';
