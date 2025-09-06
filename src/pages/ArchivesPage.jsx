@@ -2,9 +2,9 @@ import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
-import { getActiveNotes } from '../utils/local-data';
+import { getArchivedNotes } from '../utils/local-data';
 
-function HomePageWrapper() {
+function ArchivesPageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
 
   const keyword = searchParams.get('keyword');
@@ -13,15 +13,15 @@ function HomePageWrapper() {
     setSearchParams({ keyword });
   }
 
-  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  return  <ArchivesPage defaultKeyword={keyword} keywordChange={changeSearchParams} />
 }
 
-class HomePage extends React.Component {
+class ArchivesPage extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      notes: getActiveNotes(),
+      notes: getArchivedNotes(),
       keyword: props.defaultKeyword || ''
     };
 
@@ -47,20 +47,14 @@ class HomePage extends React.Component {
 
     return (
       <main>
-        <section className="homepage">
-          <h2>Catatan Aktif</h2>
+        <section className="archives-page">
+          <h2>Catatan Arsip</h2>
           <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
           <NoteList notes={notes} />
-          <div className="homepage__action">
-            <button className="action" type="button" title="Tambah">
-              // TODO: plus icon
-              Plus
-            </button>
-          </div>
         </section>
       </main>
     )
   }
 }
 
-export default HomePageWrapper;
+export default ArchivesPageWrapper;

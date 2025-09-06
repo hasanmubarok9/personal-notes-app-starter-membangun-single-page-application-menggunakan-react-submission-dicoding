@@ -8,7 +8,6 @@ function NoteList({ notes }) {
         notes.map((note) => (
           <NoteItem
             key={note.id}
-            id={note.id}
             {...note}
           />
         ))

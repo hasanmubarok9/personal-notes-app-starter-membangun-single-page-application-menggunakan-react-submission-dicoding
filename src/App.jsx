@@ -1,20 +1,23 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, Link } from 'react-router-dom';
 import Navigation from './components/Navigation';
 import HomePage from './pages/HomePage';
+import ArchivesPage from './pages/ArchivesPage';
+import DetailPage from './pages/DetailPage';
 import AddPage from './pages/AddPage';
 
 function App() {
   return (
     <div className="app-container">
       <header>
-        <h1>Aplikasi Catatan</h1>
+        <h1><Link to="/">Aplikasi Catatan</Link></h1>
         <Navigation />
       </header>
       <main>
         <Routes>
           <Route path="/" element={<HomePage /> } />
-          <Route path="/:name" element={<HomePage /> } />
+          <Route path="/archives" element={<ArchivesPage /> } />
+          <Route path="/notes/:id" element={<DetailPage /> } />
           <Route path="/add" element={<AddPage /> } />
         </Routes>
       </main>
