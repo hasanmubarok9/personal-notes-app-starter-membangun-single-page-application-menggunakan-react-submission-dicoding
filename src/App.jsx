@@ -5,6 +5,7 @@ import HomePage from './pages/HomePage';
 import ArchivesPage from './pages/ArchivesPage';
 import DetailPage from './pages/DetailPage';
 import AddPage from './pages/AddPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
           <Route path="/archives" element={<ArchivesPage /> } />
           <Route path="/notes/:id" element={<DetailPage /> } />
           <Route path="/add" element={<AddPage /> } />
+          <Route path="*" element={<NotFoundPage /> } />
         </Routes>
       </main>
     </div>
