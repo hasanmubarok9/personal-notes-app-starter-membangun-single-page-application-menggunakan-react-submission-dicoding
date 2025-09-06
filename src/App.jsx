@@ -4,8 +4,17 @@ import Navigation from './components/Navigation';
 function App() {
   return (
     <div className="app-container">
-      <Navigation />
+      <header>
+        <h1>Aplikasi Catatan</h1>
+        <Navigation />
+      </header>
     </div>
+    <main>
+      <Routes>
+        <Route path="/" elements={<HomePage />} />
+        <Route path="/add" elements={<AddPage />} />
+      </Routes>
+    </main>
   );
 }
 
