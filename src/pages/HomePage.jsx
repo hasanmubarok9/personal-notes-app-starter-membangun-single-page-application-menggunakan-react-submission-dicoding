@@ -1,5 +1,6 @@
 import React from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { FiPlus } from 'react-icons/fi';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
 import { getActiveNotes } from '../utils/local-data';
@@ -60,15 +61,14 @@ class HomePage extends React.Component {
             notes.length ? (
               <NoteList notes={notes} />
             ) : (
-              <section className="notes-list__empty">
+              <section className="notes-list-empty">
                 <p className="notes-list__empty">Tidak ada catatan</p>
               </section>
             )
           }
           <div className="homepage__action">
             <button className="action" type="button" title="Tambah" onClick={this.onAddNewNoteHandler}>
-              // TODO: plus icon
-              Plus
+            <FiPlus />
             </button>
           </div>
         </section>

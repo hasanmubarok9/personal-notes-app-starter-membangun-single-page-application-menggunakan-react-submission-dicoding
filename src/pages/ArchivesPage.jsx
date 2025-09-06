@@ -54,7 +54,7 @@ class ArchivesPage extends React.Component {
             notes.length ? (
               <NoteList notes={notes} />
             ) : (
-              <section className="notes-list__empty">
+              <section className="notes-list-empty">
                 <p className="notes-list__empty">Tidak ada catatan</p>
               </section>
             )

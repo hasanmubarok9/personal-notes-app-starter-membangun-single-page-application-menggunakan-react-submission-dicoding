@@ -27,7 +27,7 @@ class NoteInput extends React.Component {
       return {
         body: event.target.value
       }
-    })
+    });
   }
 
   onSubmitEventHandler() {

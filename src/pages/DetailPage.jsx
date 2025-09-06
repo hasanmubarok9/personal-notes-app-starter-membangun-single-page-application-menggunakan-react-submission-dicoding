@@ -1,12 +1,14 @@
 import React from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { FiDownload, FiTrash } from 'react-icons/fi';
 import { getNote } from '../utils/local-data';
 import { showFormattedDate } from '../utils';
+import { archiveNote, unarchiveNote, deleteNote } from '../utils/local-data';
 
 function DetailPageWrapper() {
+  const navigate = useNavigate();
   const { id } = useParams();
-  console.log('nilai param id: ', id);
-  return <DetailPage id={id}/>
+  return <DetailPage id={id} navigate={navigate}/>
 }
 
 class DetailPage extends React.Component {
@@ -16,6 +18,23 @@ class DetailPage extends React.Component {
     this.state = {
       note: getNote(props.id)
     }
+
+    this.onClickActionHandler = this.onClickActionHandler.bind(this);
+    this.onDeleteNoteHandler = this.onDeleteNoteHandler.bind(this);
+  }
+
+  onClickActionHandler() {
+    if (this.state.note.archived) {
+      unarchiveNote(this.props.id);
+    } else {
+      archiveNote(this.props.id);
+    }
+    this.props.navigate('/');
+  }
+
+  onDeleteNoteHandler() {
+    deleteNote(this.props.id);
+    this.props.navigate('/');
   }
 
   render() {
@@ -35,11 +54,17 @@ class DetailPage extends React.Component {
           {body}
         </div>
         <div className="detail-page__action">
-          <button className="action" type="button" title="Arsipkan">
-            Arsipkan
+          <button className="action" type="button" title={archived ? "Aktifkan" : "Arsipkan"} onClick={this.onClickActionHandler}>
+            {
+              archived ? (
+                <FiUpload />
+              ) : (
+                <FiDownload />
+              )
+            }
           </button>
-          <button className="action" type="button" title="Hapus">
-            Hapus
+          <button className="action" type="button" title="Hapus" onClick={this.onDeleteNoteHandler}>
+            <FiTrash />
           </button>
         </div>
       </section>
