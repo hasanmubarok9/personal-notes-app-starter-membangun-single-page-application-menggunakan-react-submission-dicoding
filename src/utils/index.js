@@ -1,11 +1,16 @@
 const showFormattedDate = (date) => {
   const options = {
-    weekday: 'long',
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
   };
-  return new Date(date).toLocaleDateString('id-ID', options);
+  return new Date(date).toLocaleDateString("id-ID", options);
 };
 
-export { showFormattedDate };
+function decodeHTML(html) {
+  const doc = new DOMParser().parseFromString(html, "text/html");
+  return doc.documentElement.textContent || "";
+}
+
+export { showFormattedDate, decodeHTML };

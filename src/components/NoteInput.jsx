@@ -26,13 +26,20 @@ class NoteInput extends React.Component {
   onBodyChangeEventHandler(event) {
     this.setState(() => {
       return {
-        body: event.target.innerHTML
+        body: event.target.innerHTML 
       }
     });
   }
 
   onSubmitEventHandler() {
     this.props.addNote(this.state);
+
+    // reset editor
+    if (this.bodyRef.current) this.bodyRef.current.innerHTML = '';
+    this.setState({
+      title: '',
+      body: ''
+    });
   }
 
   render() {
