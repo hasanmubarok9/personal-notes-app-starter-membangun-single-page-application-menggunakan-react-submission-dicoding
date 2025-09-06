@@ -1,10 +1,11 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
 import { getActiveNotes } from '../utils/local-data';
 
 function HomePageWrapper() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
 
   const keyword = searchParams.get('keyword');
@@ -13,7 +14,7 @@ function HomePageWrapper() {
     setSearchParams({ keyword });
   }
 
-  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} navigate={navigate} />
 }
 
 class HomePage extends React.Component {
@@ -26,6 +27,7 @@ class HomePage extends React.Component {
     };
 
     this.onKeywordChangeHandler = this.onKeywordChangeHandler.bind(this);
+    this.onAddNewNoteHandler = this.onAddNewNoteHandler.bind(this);
   }
 
   onKeywordChangeHandler(keyword) {
@@ -36,6 +38,10 @@ class HomePage extends React.Component {
     })
 
     this.props.keywordChange(keyword);
+  }
+
+  onAddNewNoteHandler() {
+    this.props.navigate('/add');
   }
 
   render() {
@@ -50,9 +56,17 @@ class HomePage extends React.Component {
         <section className="homepage">
           <h2>Catatan Aktif</h2>
           <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
-          <NoteList notes={notes} />
+          {
+            notes.length ? (
+              <NoteList notes={notes} />
+            ) : (
+              <section className="notes-list__empty">
+                <p className="notes-list__empty">Tidak ada catatan</p>
+              </section>
+            )
+          }
           <div className="homepage__action">
-            <button className="action" type="button" title="Tambah">
+            <button className="action" type="button" title="Tambah" onClick={this.onAddNewNoteHandler}>
               // TODO: plus icon
               Plus
             </button>

@@ -50,7 +50,15 @@ class ArchivesPage extends React.Component {
         <section className="archives-page">
           <h2>Catatan Arsip</h2>
           <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
-          <NoteList notes={notes} />
+          {
+            notes.length ? (
+              <NoteList notes={notes} />
+            ) : (
+              <section className="notes-list__empty">
+                <p className="notes-list__empty">Tidak ada catatan</p>
+              </section>
+            )
+          }
         </section>
       </main>
     )
