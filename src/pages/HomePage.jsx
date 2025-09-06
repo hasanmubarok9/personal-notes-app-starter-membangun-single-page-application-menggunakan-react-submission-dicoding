@@ -1,5 +1,7 @@
 import React from 'react';
 import { useSearchParams } from 'react-router-dom';
+import SearchBar from '../components/SearchBar';
+import NoteList from '../components/NoteList';
 
 function HomePageWrapper() {
   const [searchParams, setSearchParams] = useSearchParams();
@@ -10,7 +12,7 @@ function HomePageWrapper() {
     setSearchParams({ keyword });
   }
 
-  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchPrams} />
+  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
 }
 
 class HomePage extends React.Component {
@@ -19,22 +21,22 @@ class HomePage extends React.Component {
 
     this.state = {
       notes: [],
-      keyword: propd.defaultKeyword || ''
+      keyword: props.defaultKeyword || ''
     };
   }
 
   render() {
     return (
       <main>
-        <section>
+        <section className="homepage">
           <h2>Catatan Aktif</h2>
-          // TODO: search bar
-          // TODO: notes list
+          <SearchBar />
+          <NoteList />
           <div className="homepage__action">
             <button className="action" type="button" title="Tambah">
               // TODO: plus icon
               Plus
-            <button>
+            </button>
           </div>
         </section>
       </main>

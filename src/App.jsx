@@ -1,5 +1,8 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import Navigation from './components/Navigation';
+import HomePage from './pages/HomePage';
+import AddPage from './pages/AddPage';
 
 function App() {
   return (
@@ -8,13 +11,13 @@ function App() {
         <h1>Aplikasi Catatan</h1>
         <Navigation />
       </header>
+      <main>
+        <Routes>
+          <Route path="/" element={<HomePage /> } />
+          <Route path="/add" element={<AddPage /> } />
+        </Routes>
+      </main>
     </div>
-    <main>
-      <Routes>
-        <Route path="/" elements={<HomePage />} />
-        <Route path="/add" elements={<AddPage />} />
-      </Routes>
-    </main>
   );
 }
 
