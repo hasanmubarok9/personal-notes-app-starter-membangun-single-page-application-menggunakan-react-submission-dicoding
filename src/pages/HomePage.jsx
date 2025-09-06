@@ -1,10 +1,12 @@
 import React from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useParams } from 'react-router-dom';
 import SearchBar from '../components/SearchBar';
 import NoteList from '../components/NoteList';
-import { getActiveNotes } from '../utils/local-data';
+import { getActiveNotes, getArchivedNotes } from '../utils/local-data';
 
 function HomePageWrapper() {
+  const { name } = useParams();
+  console.log("di homepage, nilai param name: ", name);
   const [searchParams, setSearchParams] = useSearchParams();
 
   const keyword = searchParams.get('keyword');
@@ -13,15 +15,16 @@ function HomePageWrapper() {
     setSearchParams({ keyword });
   }
 
-  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} />
+  return  <HomePage defaultKeyword={keyword} keywordChange={changeSearchParams} pathParamName={name ?? ''} />
 }
 
 class HomePage extends React.Component {
   constructor(props) {
     super(props);
 
+    console.log("nilai props pathParamName: ", props.pathParamName)
     this.state = {
-      notes: getActiveNotes(), 
+      notes: props.pathParamName === 'archives' ? getArchivedNotes() : getActiveNotes(), 
       keyword: props.defaultKeyword || ''
     };
 
@@ -44,10 +47,13 @@ class HomePage extends React.Component {
         this.state.keyword.toLowerCase()
       )
     });
+
+    const isArchivedPage = this.props.pathParamName === 'archives';
+
     return (
       <main>
         <section className="homepage">
-          <h2>Catatan Aktif</h2>
+          <h2>Catatan {isArchivedPage ? "Arsip" : "Aktif"}</h2>
           <SearchBar keyword={this.state.keyword} keywordChange={this.onKeywordChangeHandler} />
           <NoteList notes={notes} />
           <div className="homepage__action">

@@ -14,6 +14,7 @@ function App() {
       <main>
         <Routes>
           <Route path="/" element={<HomePage /> } />
+          <Route path="/:name" element={<HomePage /> } />
           <Route path="/add" element={<AddPage /> } />
         </Routes>
       </main>
