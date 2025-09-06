@@ -1,12 +1,18 @@
 import React from 'react';
+import { showFormattedDate } from '../utils';
 
-function NoteItem() {
+function NoteItem({
+  title,
+  body,
+  createdAt,
+}) {
+  const formattedCreatedAt = showFormattedDate(createdAt);
   return (
     <article className="note-item">
-        <h3 className="note-item__title">Babel</h3>
-        <p className="note-item__createdAt">Kamis, 14 April 2023</p>
+        <h3 className="note-item__title">{title}</h3>
+        <p className="note-item__createdAt">{formattedCreatedAt}</p>
         <p className="note-item__body">
-          Babel merupakan tools open-source yang digunakan untuk mengubah sintaks ECMASCRIPT 2015+ menjadi sintaks yang didukung oleh JavaScript engine versi lama. Babel sering dipakai ketika kita menggunakan sintaks terbaru termasuk sintaks JSX.
+          {body} 
         </p>
     </article>
   )

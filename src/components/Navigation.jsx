@@ -2,7 +2,7 @@ import React from 'react';
 
 function Navigation() {
   return (
-        <nav>
+        <nav className="navigation">
           <ul>
             <li><a href="/">Arsip</a></li>
           </ul>
